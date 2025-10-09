@@ -13,4 +13,7 @@ body {
       margin-inline: auto;
       border-radius: 8px; 
     }
+    nav {
+      display: flex;
+    }
   }
