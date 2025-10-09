@@ -6,4 +6,11 @@ body {
     max-width: 100ch;
     margin-inline: max(1em, (100% - 100ch) / 2);
     padding: 1em;
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin-inline: auto;
+      border-radius: 8px; 
+    }
   }
