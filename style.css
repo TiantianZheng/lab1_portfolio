@@ -35,4 +35,19 @@ nav a:hover {
   border-bottom: 0.4em solid oklch(65% 50% 0);
   background-color: oklch(from oklch(65% 50% 0) 95% 5% h);
 }
-  
+input,
+textarea,
+button{
+  font: inherit;
+}
+form label,
+form input,
+form textarea,
+form button{
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+}
+form label{
+  margin-block:0.5em;
+}
