@@ -85,6 +85,11 @@ form button{
   display: block;
   margin-block: 0.5em;
 }
+.projects p {
+  font-size: 0.9em;
+  line-height: 1.4;
+  margin: 0;
+}
 h1 {
   font-size: 400%;
   text-wrap: balance;
