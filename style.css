@@ -56,11 +56,16 @@ form{
   display:grid;
   grid-template-columns: auto 1fr;
   gap: 1em;
-  align-items: baseline;
+  align-items: center;
 }
 form label{
   display: contents;
 }
 form button{
   grid-column: 1 / -1;
+}
+input,
+textarea {
+  vertical-align: middle;
+  line-height: 1.4;
 }
