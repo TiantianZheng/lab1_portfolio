@@ -69,3 +69,19 @@ form button{
   grid-template-columns: repeat(auto-fill, minmax(15em, 1fr)); 
   gap: 1em;
 }
+.projects article {
+  display: grid;
+  grid-template-rows: subgrid;
+  grid-row: span 3;
+  gap: 1em;
+}
+.projects h2{
+  margin: 0;
+}
+.projects img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+  display: block;
+  margin-block: 0.5em;
+}
