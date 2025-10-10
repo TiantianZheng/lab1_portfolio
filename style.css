@@ -64,3 +64,8 @@ form label{
 form button{
   grid-column: 1 / -1;
 }
+form button:hover {
+  background: oklch(65% 50% 0);
+  color: white;
+  transition: background 0.3s ease;
+}
