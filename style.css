@@ -34,7 +34,8 @@ nav a {
   padding: 0.5em;
   }
 nav a.current {
-  border-bottom: 0.4em solid oklch(80% 3% 200);
+  /* border-bottom: 0.4em solid oklch(80% 3% 200); */
+  border-bottom: 0.4em solid oklch(60% 20% 200 / 70%);
   padding-bottom: calc(0.5em - 0.4em); 
   font-weight: bold;
 }
