@@ -21,17 +21,10 @@ html {
 }
 
 nav {
-  --border-color: oklch(50% 10% 200 / 40%);
-  border-bottom: 1px solid var(--border-color);
-}
-nav a.current,
-nav a:hover {
-  background-color: color-mix(in oklch, var(--color-accent), canvas 85%);
-}
-nav {
   display: flex;
   margin-bottom: 1.5em;
-  border-bottom: 1px solid oklch(80% 3% 200);
+  border-bottom: 1px solid var(--border-color);
+  --border-color: oklch(50% 10% 200 / 40%);
   }
 nav a {
   flex: 1; 
@@ -47,7 +40,7 @@ nav a.current {
 }
 nav a:hover {
   border-bottom: 0.4em solid oklch(65% 50% 0);
-  background-color: oklch(from oklch(65% 50% 0) 95% 5% h);
+  background-color: color-mix(in oklch, var(--color-accent), canvas 85%);
 }
 input,
 textarea,
