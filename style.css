@@ -14,6 +14,21 @@ img {
   margin-inline: auto;
   border-radius: 4px; 
   }
+html {
+  color-scheme: light dark;         
+  background-color: canvas;   
+  color: canvastext;   
+}
+
+nav {
+  --border-color: oklch(50% 10% 200 / 40%);
+  border-bottom: 1px solid var(--border-color);
+}
+
+/* (optional) fix hover color so it looks good in both themes */
+nav a:hover {
+  background-color: color-mix(in oklch, var(--color-accent), canvas 85%);
+}
 nav {
   display: flex;
   margin-bottom: 1.5em;
