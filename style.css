@@ -26,9 +26,9 @@ nav {
 }
 
 /* (optional) fix hover color so it looks good in both themes */
-nav a:hover {
+/* nav a:hover {
   background-color: color-mix(in oklch, var(--color-accent), canvas 85%);
-}
+} */
 nav {
   display: flex;
   margin-bottom: 1.5em;
