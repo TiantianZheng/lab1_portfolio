@@ -39,9 +39,13 @@ nav a.current {
   font-weight: bold;
 }
 nav a:hover {
+  border-bottom: 0.4em solid oklch(65% 45% 350);
+  background-color: color-mix(in oklch, oklch(65% 45% 350), canvas 70%);
+}
+/* nav a:hover {
   border-bottom: 0.4em solid oklch(65% 50% 0);
   background-color: color-mix(in oklch, var(--color-accent), canvas 85%);
-}
+} */
 input,
 textarea,
 button{
