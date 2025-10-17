@@ -67,3 +67,21 @@ document.body.insertAdjacentHTML(
     </label>
     `
   );
+
+const select = document.querySelector(".color-scheme select");
+
+function setColorScheme(scheme) {
+document.documentElement.style.setProperty("color-scheme", scheme);
+}
+
+select.addEventListener("input", (event) => {
+const scheme = event.target.value;
+setColorScheme(scheme);
+localStorage.colorScheme = scheme;
+});
+
+if ("colorScheme" in localStorage) {
+    const saved = localStorage.colorScheme;
+    setColorScheme(saved);
+    select.value = saved;
+  }
