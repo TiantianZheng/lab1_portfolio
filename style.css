@@ -172,3 +172,15 @@ h3, h4, h5, h6 {
   font-size: 300%;
   margin-bottom: 0.2em;
 }
+.color-scheme {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 0.8rem;
+  font-family: inherit;
+}
+
+.color-scheme select {
+  font-family: inherit;
+  font-size: inherit;
+}
