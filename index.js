@@ -1,3 +1,4 @@
+
 import { fetchJSON, renderProjects, fetchGitHubData } from './global.js';
 
 async function initHome() {
@@ -6,7 +7,7 @@ async function initHome() {
   renderProjects(projects.slice(0, 3), document.querySelector('.projects'), 'h3');
 
   // Fetch GitHub data
-  const githubData = await fetchGitHubData('your-username'); // replace with yours
+  const githubData = await fetchGitHubData('TiantianZheng'); // replace with yours
 
   // Update stats
   document.getElementById('followers').textContent = githubData.followers;

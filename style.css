@@ -186,15 +186,15 @@ h3, h4, h5, h6 {
 }
 
 #profile-stats {
-  text-align: center;
+  text-align: left;
   margin: 4rem auto;
 }
 
-#profile-stats h2 {
-  font-size: 1.8rem;
-  font-weight: 800;
-  margin-bottom: 2rem;
-}
+/* #profile-stats h2 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+} */
 
 #profile-stats dl {
   display: grid;
