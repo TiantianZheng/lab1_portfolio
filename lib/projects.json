@@ -1,7 +1,7 @@
 [
     {
       "title": "Predicting Power Outage Severity in U.S.",
-      "image": "https://github.com/TiantianZheng/lab1_portfolio/images/newplot.png",
+      "image": "https://github.com/TiantianZheng/lab1_portfolio/blob/main/images/newplot.png?raw=true",
       "year": "2025",
       "description": "A data science project exploring how the cause of power outages—natural events vs. other factors—impacts the number of customers affected. Includes data cleaning, visualizations, hypothesis testing, and predictive modeling."
     },
