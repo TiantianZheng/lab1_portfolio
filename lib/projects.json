@@ -1,18 +1,21 @@
 [
     {
-      "title": "Test Project",
-      "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-      "description": "This is just a test project."
+      "title": "Predicting Power Outage Severity in U.S.",
+      "image": "https://github.com/TiantianZheng/lab1_portfolio/images/newplot.png",
+      "year": "2025",
+      "description": "A data science project exploring how the cause of power outages—natural events vs. other factors—impacts the number of customers affected. Includes data cleaning, visualizations, hypothesis testing, and predictive modeling."
     },
     {
-      "title": "Second Project",
+      "title": "Association between lifestyle factors and cancer severity scores",
       "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-      "description": "Another example project to demonstrate templating."
+      "year": "2025",
+      "description": "This project aims to build on prior work by examining how genetic risk factors and modifiable lifestyle factors jointly associate with cancer severity in the United States between 2015 and 2024."
     },
     {
-        "title": "Second Project",
+        "title": "Factors affecting the possibility of successful transactions",
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Another example project to demonstrate templating."
+        "year": "2024",
+        "description": "This project aims for discovering how different page types, specific dates, and website metrics could affect the possibility of successful transactions."
       },
     {
     "title": "Second Project",
