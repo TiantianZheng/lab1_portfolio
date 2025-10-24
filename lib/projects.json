@@ -1,0 +1,12 @@
+[
+    {
+      "title": "Test Project",
+      "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+      "description": "This is just a test project."
+    },
+    {
+      "title": "Second Project",
+      "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+      "description": "Another example project to demonstrate templating."
+    }
+  ]
