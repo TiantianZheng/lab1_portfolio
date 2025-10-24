@@ -9,5 +9,4 @@ async function initProjects() {
         title.innerHTML = `<strong>${projects.length}</strong> Projects`;
     }
     }
-
 initProjects();

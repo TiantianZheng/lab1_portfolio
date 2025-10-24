@@ -184,3 +184,30 @@ h3, h4, h5, h6 {
   font-family: inherit;
   font-size: inherit;
 }
+
+#profile-stats {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+#profile-stats h2 {
+  margin-bottom: 1rem;
+}
+
+#profile-stats dl {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+#profile-stats dt {
+  font-weight: bold;
+  grid-row: 1;
+}
+
+#profile-stats dd {
+  grid-row: 2;
+  margin: 0;
+  font-size: 1.3rem;
+  color: var(--text-color, #fff);
+}
