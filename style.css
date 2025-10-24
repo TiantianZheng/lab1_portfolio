@@ -186,28 +186,38 @@ h3, h4, h5, h6 {
 }
 
 #profile-stats {
-  margin-top: 2rem;
   text-align: center;
+  margin: 4rem auto;
 }
 
 #profile-stats h2 {
-  margin-bottom: 1rem;
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin-bottom: 2rem;
 }
 
 #profile-stats dl {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 1rem;
+  align-items: center;
+  justify-items: center;
+  row-gap: 0.5rem;
 }
 
 #profile-stats dt {
-  font-weight: bold;
   grid-row: 1;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #6b7280; /* soft gray */
+  margin: 0;
 }
 
 #profile-stats dd {
   grid-row: 2;
+  font-size: 2.2rem;
+  font-weight: 700;
   margin: 0;
-  font-size: 1.3rem;
-  color: var(--text-color, #fff);
+  color: #111;
 }
