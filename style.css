@@ -186,37 +186,28 @@ h3, h4, h5, h6 {
 }
 
 #profile-stats {
+  margin-top: 2rem;
   text-align: center;
-  margin: 4rem auto;
-  color: var(--text-color, #111);
 }
 
 #profile-stats h2 {
-  font-weight: 700;
-  font-size: 1.8rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 #profile-stats dl {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 1rem;
-  justify-items: center;
 }
 
 #profile-stats dt {
-  font-size: 0.9rem;
-  font-weight: 600;
-  letter-spacing: 1px;
-  color: #6b7280; /* soft gray */
-  text-transform: uppercase;
+  font-weight: bold;
   grid-row: 1;
 }
 
 #profile-stats dd {
-  font-size: 2.5rem;
-  font-weight: 700;
-  margin: 0;
   grid-row: 2;
-  color: var(--text-color, #000);
+  margin: 0;
+  font-size: 1.3rem;
+  color: var(--text-color, #fff);
 }
