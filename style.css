@@ -187,30 +187,36 @@ h3, h4, h5, h6 {
 
 #profile-stats {
   text-align: center;
-  margin: 3rem auto;
+  margin: 4rem auto;
+  color: var(--text-color, #111);
 }
 
 #profile-stats h2 {
-  font-size: 1.8rem;
   font-weight: 700;
-  margin-bottom: 1.2rem;
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
 }
 
 #profile-stats dl {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  justify-items: center;
 }
 
 #profile-stats dt {
-  grid-row: 1;
   font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: #6b7280; /* soft gray */
   text-transform: uppercase;
-  color: gray;
+  grid-row: 1;
 }
 
 #profile-stats dd {
-  grid-row: 2;
-  font-size: 2rem;
-  font-weight: bold;
+  font-size: 2.5rem;
+  font-weight: 700;
   margin: 0;
+  grid-row: 2;
+  color: var(--text-color, #000);
 }
