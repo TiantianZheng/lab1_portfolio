@@ -6,8 +6,8 @@ async function initProjects() {
     renderProjects(projects, projectsContainer, 'h2');
     const title = document.querySelector('.projects-title');
     if (title && projects) {
-        title.textContent = `Projects (${projects.length})`;
+        title.innerHTML = `<strong>${projects.length}</strong> Projects`;
     }
-}
+    }
 
 initProjects();
