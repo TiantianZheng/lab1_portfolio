@@ -66,10 +66,10 @@
         "description": "Analyzed international trade data to visualize how import and export patterns reflect global economic relationships and supply chain dependencies."
       },
       {
-        "title": "Second Project",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "year": "2025",
-        "description": "Another example project to demonstrate templating."
+        "title": "Color Psychology in School Architecture",
+        "image": "https://github.com/TiantianZheng/lab1_portfolio/blob/main/images/project15.jpg?raw=true",
+        "year": "2020",
+        "description": "A research-based design project exploring how interior color combinations in school buildings can influence students’ emotions, focus, and overall learning comfort."
       }
 
   ]
