@@ -294,3 +294,25 @@ h3, h4, h5, h6 {
   border-color: #666;
   box-shadow: 0 0 5px #aaa;
 }
+
+svg:has(path:hover) path:not(:hover) {
+  opacity: 0.5;
+}
+
+
+path {
+  transition: 300ms;
+  cursor: pointer;
+}
+
+path:hover {
+  fill: oklch(0.7305 0.1529 19.46);
+}
+
+.selected {
+  --color: oklch(60% 45% 0) ;
+}
+
+.selected:is(path) {
+  fill: var(--color);
+}

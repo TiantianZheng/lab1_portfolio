@@ -82,7 +82,7 @@ initProjects();
 //     .attr('style', `--color:${colors(idx)}`) // set the style attribute while passing in parameters
 //     .html(`<span class="swatch"></span> ${d.label} <em>(${d.value})</em>`); // set the inner html of <li>
 // });
-
+let selectedIndex = -1;
 function prepareYearData(projects) {
     let rolledData = d3.rollups(
       projects,
@@ -110,17 +110,57 @@ function prepareYearData(projects) {
     let arcData = sliceGenerator(data);
     let arcs = arcData.map(d => arcGenerator(d));
     let colorScale = d3.scaleOrdinal(d3.schemeTableau10);
-  
+    
     arcs.forEach((arc, i) => {
-      svg.append('path').attr('d', arc).attr('fill', colorScale(i));
-    });
-  
-    data.forEach((d, i) => {
-      legend.append('li')
-        .attr('style', `--color:${colorScale(i)}`)
-        .html(`<span class="swatch"></span> ${d.label} <em>(${d.value})</em>`);
-    });
-  }
+        svg.append('path')
+          .attr('d', arc)
+          .attr('fill', colorScale(i))
+          .attr('stroke', 'white')
+          .attr('stroke-width', 0.4)
+          .on('click', () => {
+            
+            selectedIndex = selectedIndex === i ? -1 : i;
+    
+            svg.selectAll('path')
+              .attr('class', (_, idx) => (idx === selectedIndex ? 'selected' : ''));
+    
+            legend.selectAll('li')
+              .attr('class', (_, idx) => (idx === selectedIndex ? 'selected' : ''));
+    
+            if (selectedIndex === -1) {
+     
+              renderProjects(projects, projectsContainer, 'h2');
+            } else {
+              let selectedYear = data[selectedIndex].label;
+              let filtered = projects.filter(p => p.year === selectedYear);
+              renderProjects(filtered, projectsContainer, 'h2');
+            }
+          });
+      });
+      data.forEach((d, i) => {
+        legend.append('li')
+          .attr('style', `--color:${colorScale(i)}`)
+          .html(`<span class="swatch"></span> ${d.label} <em>(${d.value})</em>`)
+          .on('click', () => {
+            selectedIndex = selectedIndex === i ? -1 : i;
+    
+            svg.selectAll('path')
+              .attr('class', (_, idx) => (idx === selectedIndex ? 'selected' : ''));
+            legend.selectAll('li')
+              .attr('class', (_, idx) => (idx === selectedIndex ? 'selected' : ''));
+    
+            if (selectedIndex === -1) {
+              renderProjects(projects, projectsContainer, 'h2');
+            } else {
+              let selectedYear = data[selectedIndex].label;
+              let filtered = projects.filter(p => p.year === selectedYear);
+              renderProjects(filtered, projectsContainer, 'h2');
+            }
+          });
+      });
+    }
+
+
 
 function setupSearch(allProjects) {
     const searchInput = document.querySelector('.searchBar');
