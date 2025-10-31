@@ -47,8 +47,10 @@ let arcs = arcData.map((d) => arcGenerator(d));
 // let arcs = arcData.map((d) => arcGenerator(d));
 let colors = d3.scaleOrdinal(d3.schemeTableau10);
 
-arcs.forEach((arc, idx) => {
-  svg.append("path")
-    .attr("d", arc)
-    .attr("fill", colors[idx]);
-});
+arcs.forEach((arc, i) => {
+    svg.append("path")
+      .attr("d", arc)
+      .attr("fill", colorScale(i))
+      .attr("stroke", "white")
+      .attr("stroke-width", 0.5);
+  });
