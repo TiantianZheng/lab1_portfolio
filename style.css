@@ -237,13 +237,16 @@ h3, h4, h5, h6 {
 }
 
 .legend {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(9em, 1fr));
-  gap: 1em;
+  display: flex;
+  flex-wrap: nowrap;    
+  justify-content: center;  
+  align-items: center;
+  gap: 1.5em;          
   border: 1px solid #ccc;
   padding: 1em;
   margin-top: 2em;
   list-style: none;
+  overflow-x: auto;       
 }
 
 .legend li {
