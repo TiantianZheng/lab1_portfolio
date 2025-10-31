@@ -15,20 +15,21 @@ const legend = d3.select('.legend');
 //     }
 // initProjects();
 
-async function initProjects() {
-    const projects = await fetchJSON('../lib/projects.json');
+
+// async function initProjects() {
+//     const projects = await fetchJSON('../lib/projects.json');
  
-    renderProjects(projects, projectsContainer, 'h2');
+//     renderProjects(projects, projectsContainer, 'h2');
 
-    const title = document.querySelector('.projects-title');
-    if (title) title.innerHTML = `<strong>${projects.length}</strong> Projects`;
+//     const title = document.querySelector('.projects-title');
+//     if (title) title.innerHTML = `<strong>${projects.length}</strong> Projects`;
 
-    renderPieChart(projects);
+//     renderPieChart(projects);
   
-    setupSearch(projects);
-  }
+//     setupSearch(projects);
+//   }
   
-initProjects();
+// initProjects();
 
 
 // let arcGenerator = d3.arc()
@@ -82,99 +83,205 @@ initProjects();
 //     .attr('style', `--color:${colors(idx)}`) // set the style attribute while passing in parameters
 //     .html(`<span class="swatch"></span> ${d.label} <em>(${d.value})</em>`); // set the inner html of <li>
 // });
-let selectedIndex = -1;
-function prepareYearData(projects) {
-    let rolledData = d3.rollups(
-      projects,
-      v => v.length,
-      d => d.year
-    );
+
+// let selectedIndex = -1;
+// function prepareYearData(projects) {
+//     let rolledData = d3.rollups(
+//       projects,
+//       v => v.length,
+//       d => d.year
+//     );
   
-    return rolledData.map(([year, count]) => ({
-      value: count,
-      label: year
-    }));
-  }
-  function renderPieChart(projectsGiven) {
-    let svg = d3.select('#projects-pie-plot');
-    svg.selectAll('*').remove();
+//     return rolledData.map(([year, count]) => ({
+//       value: count,
+//       label: year
+//     }));
+//   }
+//   function renderPieChart(projectsGiven) {
+//     let svg = d3.select('#projects-pie-plot');
+//     svg.selectAll('*').remove();
 
-    let legend = d3.select('.legend');
-    legend.selectAll('*').remove();
+//     let legend = d3.select('.legend');
+//     legend.selectAll('*').remove();
 
-    let rolledData = d3.rollups(projectsGiven, v => v.length, d => d.year);
-    let data = rolledData.map(([year, count]) => ({ value: count, label: year }));
+//     let rolledData = d3.rollups(projectsGiven, v => v.length, d => d.year);
+//     let data = rolledData.map(([year, count]) => ({ value: count, label: year }));
  
-    let arcGenerator = d3.arc().innerRadius(0).outerRadius(50);
-    let sliceGenerator = d3.pie().value(d => d.value);
-    let arcData = sliceGenerator(data);
-    let arcs = arcData.map(d => arcGenerator(d));
-    let colorScale = d3.scaleOrdinal(d3.schemeTableau10);
+//     let arcGenerator = d3.arc().innerRadius(0).outerRadius(50);
+//     let sliceGenerator = d3.pie().value(d => d.value);
+//     let arcData = sliceGenerator(data);
+//     let arcs = arcData.map(d => arcGenerator(d));
+//     let colorScale = d3.scaleOrdinal(d3.schemeTableau10);
     
-    arcs.forEach((arc, i) => {
-        svg.append('path')
-          .attr('d', arc)
-          .attr('fill', colorScale(i))
-          .attr('stroke', 'white')
-          .attr('stroke-width', 0.4)
-          .on('click', () => {
+//     arcs.forEach((arc, i) => {
+//         svg.append('path')
+//           .attr('d', arc)
+//           .attr('fill', colorScale(i))
+//           .attr('stroke', 'white')
+//           .attr('stroke-width', 0.4)
+//           .on('click', () => {
             
-            selectedIndex = selectedIndex === i ? -1 : i;
+//             selectedIndex = selectedIndex === i ? -1 : i;
     
-            svg.selectAll('path')
-              .attr('class', (_, idx) => (idx === selectedIndex ? 'selected' : ''));
+//             svg.selectAll('path')
+//               .attr('class', (_, idx) => (idx === selectedIndex ? 'selected' : ''));
     
-            legend.selectAll('li')
-              .attr('class', (_, idx) => (idx === selectedIndex ? 'selected' : ''));
+//             legend.selectAll('li')
+//               .attr('class', (_, idx) => (idx === selectedIndex ? 'selected' : ''));
     
-            if (selectedIndex === -1) {
-     
-              renderProjects(projects, projectsContainer, 'h2');
-            } else {
-              let selectedYear = data[selectedIndex].label;
-              let filtered = projects.filter(p => p.year === selectedYear);
-              renderProjects(filtered, projectsContainer, 'h2');
-            }
-          });
-      });
-      data.forEach((d, i) => {
-        legend.append('li')
-          .attr('style', `--color:${colorScale(i)}`)
-          .html(`<span class="swatch"></span> ${d.label} <em>(${d.value})</em>`)
-          .on('click', () => {
-            selectedIndex = selectedIndex === i ? -1 : i;
+//             updateFilteredProjects(projects);
+//           });
+//       });
+//       data.forEach((d, i) => {
+//         legend.append('li')
+//           .attr('style', `--color:${colorScale(i)}`)
+//           .html(`<span class="swatch"></span> ${d.label} <em>(${d.value})</em>`)
+//           .on('click', () => {
+//             selectedIndex = selectedIndex === i ? -1 : i;
     
-            svg.selectAll('path')
-              .attr('class', (_, idx) => (idx === selectedIndex ? 'selected' : ''));
-            legend.selectAll('li')
-              .attr('class', (_, idx) => (idx === selectedIndex ? 'selected' : ''));
+//             svg.selectAll('path')
+//               .attr('class', (_, idx) => (idx === selectedIndex ? 'selected' : ''));
+//             legend.selectAll('li')
+//               .attr('class', (_, idx) => (idx === selectedIndex ? 'selected' : ''));
     
-            if (selectedIndex === -1) {
-              renderProjects(projects, projectsContainer, 'h2');
-            } else {
-              let selectedYear = data[selectedIndex].label;
-              let filtered = projects.filter(p => p.year === selectedYear);
-              renderProjects(filtered, projectsContainer, 'h2');
-            }
-          });
-      });
-    }
+//             if (selectedIndex === -1) {
+//               renderProjects(projects, projectsContainer, 'h2');
+//             } else {
+//               let selectedYear = data[selectedIndex].label;
+//               let filtered = projects.filter(p => p.year === selectedYear);
+//               renderProjects(filtered, projectsContainer, 'h2');
+//             }
+//           });
+//       });
+//     }
+
+// function setupSearch(allProjects) {
+//     const searchInput = document.querySelector('.searchBar');
+//     if (!searchInput) return;
+
+//     searchInput.addEventListener('input', (event) => {
+//         const query = event.target.value.toLowerCase();
+
+//         const filteredProjects = allProjects.filter(project => {
+//         const values = Object.values(project).join('\n').toLowerCase();
+//         return values.includes(query);
+//         });
+
+//         renderProjects(filteredProjects, projectsContainer, 'h2');
+//         renderPieChart(filteredProjects);
+//     });
+// }
+
+let selectedIndex = -1;  
 
 
+function prepareYearData(projects) {
+  let rolledData = d3.rollups(
+    projects,
+    v => v.length,
+    d => d.year
+  );
+
+  return rolledData.map(([year, count]) => ({
+    value: count,
+    label: year
+  }));
+}
+
+
+function renderPieChart(projectsGiven) {
+  let svg = d3.select('#projects-pie-plot');
+  svg.selectAll('*').remove();
+
+  let legend = d3.select('.legend');
+  legend.selectAll('*').remove();
+
+  let rolledData = d3.rollups(projectsGiven, v => v.length, d => d.year);
+  let data = rolledData.map(([year, count]) => ({ value: count, label: year }));
+
+  let arcGenerator = d3.arc().innerRadius(0).outerRadius(50);
+  let sliceGenerator = d3.pie().value(d => d.value);
+  let arcData = sliceGenerator(data);
+  let arcs = arcData.map(d => arcGenerator(d));
+
+  let colorScale = d3.scaleOrdinal(d3.schemeTableau10);
+
+  
+  arcs.forEach((arc, i) => {
+    svg.append('path')
+      .attr('d', arc)
+      .attr('fill', colorScale(i))
+      .attr('stroke', 'white')
+      .attr('stroke-width', 0.4)
+      .on('click', () => {
+        selectedIndex = selectedIndex === i ? -1 : i;
+
+        svg.selectAll('path')
+          .attr('class', (_, idx) => (idx === selectedIndex ? 'selected' : ''));
+
+        legend.selectAll('li')
+          .attr('class', (_, idx) => (idx === selectedIndex ? 'selected' : ''));
+
+        if (selectedIndex === -1) {
+        
+          renderProjects(projectsGiven, projectsContainer, 'h2');
+        } else {
+          let selectedYear = data[selectedIndex].label;
+          let filtered = projectsGiven.filter(p => String(p.year) === String(selectedYear));
+          renderProjects(filtered, projectsContainer, 'h2');
+        }
+      });
+  });
+
+  data.forEach((d, i) => {
+    legend.append('li')
+      .attr('style', `--color:${colorScale(i)}`)
+      .html(`<span class="swatch"></span> ${d.label} <em>(${d.value})</em>`)
+      .on('click', () => {
+        selectedIndex = selectedIndex === i ? -1 : i;
+
+        svg.selectAll('path')
+          .attr('class', (_, idx) => (idx === selectedIndex ? 'selected' : ''));
+        legend.selectAll('li')
+          .attr('class', (_, idx) => (idx === selectedIndex ? 'selected' : ''));
+
+        if (selectedIndex === -1) {
+          renderProjects(projectsGiven, projectsContainer, 'h2');
+        } else {
+          let selectedYear = data[selectedIndex].label;
+          let filtered = projectsGiven.filter(p => String(p.year) === String(selectedYear));
+          renderProjects(filtered, projectsContainer, 'h2');
+        }
+      });
+  });
+}
 
 function setupSearch(allProjects) {
-    const searchInput = document.querySelector('.searchBar');
-    if (!searchInput) return;
+  const searchInput = document.querySelector('.searchBar');
+  if (!searchInput) return;
 
-    searchInput.addEventListener('input', (event) => {
-        const query = event.target.value.toLowerCase();
+  searchInput.addEventListener('input', (event) => {
+    const query = event.target.value.toLowerCase();
 
-        const filteredProjects = allProjects.filter(project => {
-        const values = Object.values(project).join('\n').toLowerCase();
-        return values.includes(query);
-        });
-
-        renderProjects(filteredProjects, projectsContainer, 'h2');
-        renderPieChart(filteredProjects);
+    const filteredProjects = allProjects.filter(project => {
+      const values = Object.values(project).join('\n').toLowerCase();
+      return values.includes(query);
     });
+
+    renderProjects(filteredProjects, projectsContainer, 'h2');
+    renderPieChart(filteredProjects);
+  });
 }
+
+async function initProjects() {
+  const projects = await fetchJSON('../lib/projects.json');
+  renderProjects(projects, projectsContainer, 'h2');
+  renderPieChart(projects);
+  setupSearch(projects);
+
+  const title = document.querySelector('.projects-title');
+  if (title && projects) {
+    title.innerHTML = `<strong>${projects.length}</strong> Projects`;
+  }
+}
+initProjects();
