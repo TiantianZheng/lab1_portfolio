@@ -238,13 +238,14 @@ h3, h4, h5, h6 {
 
 .legend {
   display: flex;
-  flex-wrap: nowrap;     
-  align-items: center;         
+  flex-wrap: wrap;  
+  justify-content: center;    
+  align-items: center;
+  gap: 3em;         
   border: 1px solid #ccc;
   padding: 1em;
   margin-top: 2em;
-  list-style: none;
-  overflow-x: auto;       
+  list-style: none;    
 }
 
 .legend li {
