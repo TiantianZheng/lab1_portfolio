@@ -1,8 +1,8 @@
-import { fetchJSON, renderProjects } from '../global.js';
-import * as d3 from 'https://cdn.jsdelivr.net/npm/d3@7.9.0/+esm';
-const projectsContainer = document.querySelector('.projects');
-const svg = d3.select("#projects-pie-plot");
-const legend = d3.select('.legend');
+// import { fetchJSON, renderProjects } from '../global.js';
+// import * as d3 from 'https://cdn.jsdelivr.net/npm/d3@7.9.0/+esm';
+// const projectsContainer = document.querySelector('.projects');
+// const svg = d3.select("#projects-pie-plot");
+// const legend = d3.select('.legend');
      
 
 // async function initProjects() {
@@ -173,114 +173,378 @@ const legend = d3.select('.legend');
 //     });
 // }
 
-let selectedIndex = -1;  
-function prepareYearData(projects) {
-    let rolledData = d3.rollups(
-      projects,
-      v => v.length,
-      d => d.year
-    );
+// let selectedIndex = -1;  
+// function prepareYearData(projects) {
+//     let rolledData = d3.rollups(
+//       projects,
+//       v => v.length,
+//       d => d.year
+//     );
   
-    return rolledData.map(([year, count]) => ({
-      value: count,
-      label: year
-    }));
-  }
+//     return rolledData.map(([year, count]) => ({
+//       value: count,
+//       label: year
+//     }));
+//   }
   
-  function renderPieChart(projectsGiven) {
-    let svg = d3.select('#projects-pie-plot');
-    svg.selectAll('*').remove();
+//   function renderPieChart(projectsGiven) {
+//     let svg = d3.select('#projects-pie-plot');
+//     svg.selectAll('*').remove();
   
-    let legend = d3.select('.legend');
-    legend.selectAll('*').remove();
+//     let legend = d3.select('.legend');
+//     legend.selectAll('*').remove();
   
-    let rolledData = d3.rollups(projectsGiven, v => v.length, d => d.year);
-    let data = rolledData.map(([year, count]) => ({ value: count, label: year }));
+//     let rolledData = d3.rollups(projectsGiven, v => v.length, d => d.year);
+//     let data = rolledData.map(([year, count]) => ({ value: count, label: year }));
   
-    let arcGenerator = d3.arc().innerRadius(0).outerRadius(50);
-    let sliceGenerator = d3.pie().value(d => d.value);
-    let arcData = sliceGenerator(data);
-    let arcs = arcData.map(d => arcGenerator(d));
+//     let arcGenerator = d3.arc().innerRadius(0).outerRadius(50);
+//     let sliceGenerator = d3.pie().value(d => d.value);
+//     let arcData = sliceGenerator(data);
+//     let arcs = arcData.map(d => arcGenerator(d));
   
-    let colorScale = d3.scaleOrdinal(d3.schemeTableau10);
+//     let colorScale = d3.scaleOrdinal(d3.schemeTableau10);
   
-    arcs.forEach((arc, i) => {
-      svg.append('path')
-        .attr('d', arc)
-        .attr('fill', colorScale(i))
-        .attr('stroke', 'white')
-        .attr('stroke-width', 0.4)
-        .on('click', () => {
-          selectedIndex = selectedIndex === i ? -1 : i;
+//     arcs.forEach((arc, i) => {
+//       svg.append('path')
+//         .attr('d', arc)
+//         .attr('fill', colorScale(i))
+//         .attr('stroke', 'white')
+//         .attr('stroke-width', 0.4)
+//         .on('click', () => {
+//           selectedIndex = selectedIndex === i ? -1 : i;
   
-          svg.selectAll('path')
-            .attr('class', (_, idx) => (idx === selectedIndex ? 'selected' : ''));
+//           svg.selectAll('path')
+//             .attr('class', (_, idx) => (idx === selectedIndex ? 'selected' : ''));
   
-          legend.selectAll('li')
-            .attr('class', (_, idx) => (idx === selectedIndex ? 'selected' : ''));
+//           legend.selectAll('li')
+//             .attr('class', (_, idx) => (idx === selectedIndex ? 'selected' : ''));
   
-          if (selectedIndex === -1) {
+//           if (selectedIndex === -1) {
             
-            renderProjects(projectsGiven, projectsContainer, 'h2');
-          } else {
+//             renderProjects(projectsGiven, projectsContainer, 'h2');
+//           } else {
   
-            let selectedYear = data[selectedIndex].label;
-            let filtered = projectsGiven.filter(p => String(p.year) === String(selectedYear));
-            renderProjects(filtered, projectsContainer, 'h2');
-          }
-        });
-    });
+//             let selectedYear = data[selectedIndex].label;
+//             let filtered = projectsGiven.filter(p => String(p.year) === String(selectedYear));
+//             renderProjects(filtered, projectsContainer, 'h2');
+//           }
+//         });
+//     });
   
-    data.forEach((d, i) => {
-      legend.append('li')
-        .attr('style', `--color:${colorScale(i)}`)
-        .html(`<span class="swatch"></span> ${d.label} <em>(${d.value})</em>`)
-        .on('click', () => {
-          selectedIndex = selectedIndex === i ? -1 : i;
+//     data.forEach((d, i) => {
+//       legend.append('li')
+//         .attr('style', `--color:${colorScale(i)}`)
+//         .html(`<span class="swatch"></span> ${d.label} <em>(${d.value})</em>`)
+//         .on('click', () => {
+//           selectedIndex = selectedIndex === i ? -1 : i;
   
-          svg.selectAll('path')
-            .attr('class', (_, idx) => (idx === selectedIndex ? 'selected' : ''));
-          legend.selectAll('li')
-            .attr('class', (_, idx) => (idx === selectedIndex ? 'selected' : ''));
+//           svg.selectAll('path')
+//             .attr('class', (_, idx) => (idx === selectedIndex ? 'selected' : ''));
+//           legend.selectAll('li')
+//             .attr('class', (_, idx) => (idx === selectedIndex ? 'selected' : ''));
   
-          if (selectedIndex === -1) {
-            renderProjects(projectsGiven, projectsContainer, 'h2');
-          } else {
-            let selectedYear = data[selectedIndex].label;
-            let filtered = projectsGiven.filter(p => String(p.year) === String(selectedYear));
-            renderProjects(filtered, projectsContainer, 'h2');
-          }
-        });
-    });
-  }
+//           if (selectedIndex === -1) {
+//             renderProjects(projectsGiven, projectsContainer, 'h2');
+//           } else {
+//             let selectedYear = data[selectedIndex].label;
+//             let filtered = projectsGiven.filter(p => String(p.year) === String(selectedYear));
+//             renderProjects(filtered, projectsContainer, 'h2');
+//           }
+//         });
+//     });
+//   }
   
-  function setupSearch(allProjects) {
-    const searchInput = document.querySelector('.searchBar');
-    if (!searchInput) return;
+//   function setupSearch(allProjects) {
+//     const searchInput = document.querySelector('.searchBar');
+//     if (!searchInput) return;
   
-    searchInput.addEventListener('input', (event) => {
-      const query = event.target.value.toLowerCase();
+//     searchInput.addEventListener('input', (event) => {
+//       const query = event.target.value.toLowerCase();
   
-      const filteredProjects = allProjects.filter(project => {
-        const values = Object.values(project).join('\n').toLowerCase();
-        return values.includes(query);
-      });
+//       const filteredProjects = allProjects.filter(project => {
+//         const values = Object.values(project).join('\n').toLowerCase();
+//         return values.includes(query);
+//       });
   
-      renderProjects(filteredProjects, projectsContainer, 'h2');
-      renderPieChart(filteredProjects);
-    });
-  }
+//       renderProjects(filteredProjects, projectsContainer, 'h2');
+//       renderPieChart(filteredProjects);
+//     });
+//   }
   
 
-  async function initProjects() {
-    const projects = await fetchJSON('../lib/projects.json');
-    renderProjects(projects, projectsContainer, 'h2');
-    renderPieChart(projects);
-    setupSearch(projects);
+//   async function initProjects() {
+//     const projects = await fetchJSON('../lib/projects.json');
+//     renderProjects(projects, projectsContainer, 'h2');
+//     renderPieChart(projects);
+//     setupSearch(projects);
   
-    const title = document.querySelector('.projects-title');
-    if (title && projects) {
-      title.innerHTML = `<strong>${projects.length}</strong> Projects`;
-    }
+//     const title = document.querySelector('.projects-title');
+//     if (title && projects) {
+//       title.innerHTML = `<strong>${projects.length}</strong> Projects`;
+//     }
+//   }
+//   initProjects();
+
+
+// import { fetchJSON, renderProjects } from '../global.js';
+// import * as d3 from 'https://cdn.jsdelivr.net/npm/d3@7.9.0/+esm';
+
+// const projectsContainer = document.querySelector('.projects');
+// const svg = d3.select("#projects-pie-plot");
+// const legend = d3.select('.legend');
+
+// function prepareYearData(projects) {
+//   let rolledData = d3.rollups(
+//     projects,
+//     v => v.length,
+//     d => d.year
+//   );
+
+//   return rolledData.map(([year, count]) => ({
+//     value: count,
+//     label: year
+//   }));
+// }
+
+// function renderPieChart(projectsGiven) {
+//   let svg = d3.select('#projects-pie-plot');
+//   svg.selectAll('*').remove();
+
+//   let legend = d3.select('.legend');
+//   legend.selectAll('*').remove();
+
+//   let rolledData = d3.rollups(projectsGiven, v => v.length, d => d.year);
+//   let data = rolledData.map(([year, count]) => ({ value: count, label: year }));
+
+
+//   let selectedIndex = -1;
+
+//   let arcGenerator = d3.arc().innerRadius(0).outerRadius(50);
+//   let sliceGenerator = d3.pie().value(d => d.value);
+//   let arcData = sliceGenerator(data);
+//   let arcs = arcData.map(d => arcGenerator(d));
+
+//   let colorScale = d3.scaleOrdinal(d3.schemeTableau10);
+
+//   arcs.forEach((arc, i) => {
+//     svg.append('path')
+//       .attr('d', arc)
+//       .attr('fill', colorScale(i))
+//       .attr('stroke', 'white')
+//       .attr('stroke-width', 0.4)
+//       .on('click', () => {
+//         selectedIndex = selectedIndex === i ? -1 : i;
+
+//         svg.selectAll('path')
+//           .attr('class', (_, idx) => (idx === selectedIndex ? 'selected' : ''));
+
+//         legend.selectAll('li')
+//           .attr('class', (_, idx) => (idx === selectedIndex ? 'selected' : ''));
+
+//         if (selectedIndex === -1) {
+//           renderProjects(projectsGiven, projectsContainer, 'h2');
+//         } else {
+//           let selectedYear = data[selectedIndex].label;
+//           let filtered = projectsGiven.filter(p => String(p.year) === String(selectedYear));
+//           renderProjects(filtered, projectsContainer, 'h2');
+//         }
+//       });
+//   });
+
+//   data.forEach((d, i) => {
+//     legend.append('li')
+//       .attr('style', `--color:${colorScale(i)}`)
+//       .html(`<span class="swatch"></span> ${d.label} <em>(${d.value})</em>`)
+//       .on('click', () => {
+//         selectedIndex = selectedIndex === i ? -1 : i;
+
+//         svg.selectAll('path')
+//           .attr('class', (_, idx) => (idx === selectedIndex ? 'selected' : ''));
+//         legend.selectAll('li')
+//           .attr('class', (_, idx) => (idx === selectedIndex ? 'selected' : ''));
+
+//         if (selectedIndex === -1) {
+//           renderProjects(projectsGiven, projectsContainer, 'h2');
+//         } else {
+//           let selectedYear = data[selectedIndex].label;
+//           let filtered = projectsGiven.filter(p => String(p.year) === String(selectedYear));
+//           renderProjects(filtered, projectsContainer, 'h2');
+//         }
+//       });
+//   });
+// }
+
+// function setupSearch(allProjects) {
+//   const searchInput = document.querySelector('.searchBar');
+//   if (!searchInput) return;
+
+//   searchInput.addEventListener('input', (event) => {
+//     const query = event.target.value.toLowerCase();
+
+//     const filteredProjects = allProjects.filter(project => {
+//       const values = Object.values(project).join('\n').toLowerCase();
+//       return values.includes(query);
+//     });
+
+//     renderProjects(filteredProjects, projectsContainer, 'h2');
+//     renderPieChart(filteredProjects);
+//   });
+// }
+
+// async function initProjects() {
+//   const projects = await fetchJSON('../lib/projects.json');
+//   renderProjects(projects, projectsContainer, 'h2');
+//   renderPieChart(projects);
+//   setupSearch(projects);
+
+//   const title = document.querySelector('.projects-title');
+//   if (title && projects) {
+//     title.innerHTML = `<strong>${projects.length}</strong> Projects`;
+//   }
+// }
+
+// initProjects();
+
+
+
+import { fetchJSON, renderProjects } from '../global.js';
+import * as d3 from 'https://cdn.jsdelivr.net/npm/d3@7.9.0/+esm';
+
+const projectsContainer = document.querySelector('.projects');
+const svg = d3.select("#projects-pie-plot");
+const legend = d3.select('.legend');
+
+let currentSelection = {
+  type: 'none', // 'none', 'year', 'search'
+  value: null,
+  year: null,
+  searchQuery: ''
+};
+
+function prepareYearData(projects) {
+  let rolledData = d3.rollups(
+    projects,
+    v => v.length,
+    d => d.year
+  );
+
+  return rolledData.map(([year, count]) => ({
+    value: count,
+    label: year
+  }));
+}
+
+function renderPieChart(projectsGiven, selectedYear = null) {
+  let svg = d3.select('#projects-pie-plot');
+  svg.selectAll('*').remove();
+
+  let legend = d3.select('.legend');
+  legend.selectAll('*').remove();
+
+  let rolledData = d3.rollups(projectsGiven, v => v.length, d => d.year);
+  let data = rolledData.map(([year, count]) => ({ value: count, label: year }));
+
+  let arcGenerator = d3.arc().innerRadius(0).outerRadius(50);
+  let sliceGenerator = d3.pie().value(d => d.value);
+  let arcData = sliceGenerator(data);
+  let arcs = arcData.map(d => arcGenerator(d));
+
+  let colorScale = d3.scaleOrdinal(d3.schemeTableau10);
+
+ 
+  let selectedIndex = -1;
+  if (selectedYear) {
+    selectedIndex = data.findIndex(d => String(d.label) === String(selectedYear));
   }
-  initProjects();
+
+  arcs.forEach((arc, i) => {
+    svg.append('path')
+      .attr('d', arc)
+      .attr('fill', colorScale(i))
+      .attr('stroke', 'white')
+      .attr('stroke-width', 0.4)
+      .attr('class', i === selectedIndex ? 'selected' : '')
+      .on('click', () => {
+        if (i === selectedIndex) {
+          currentSelection.type = currentSelection.searchQuery ? 'search' : 'none';
+          currentSelection.year = null;
+          renderProjects(projectsGiven, projectsContainer, 'h2');
+        } else {
+    
+          currentSelection.type = 'year';
+          currentSelection.year = data[i].label;
+          let filtered = projectsGiven.filter(p => String(p.year) === String(currentSelection.year));
+          renderProjects(filtered, projectsContainer, 'h2');
+        }
+        renderPieChart(projectsGiven, currentSelection.year);
+      });
+  });
+
+  data.forEach((d, i) => {
+    legend.append('li')
+      .attr('style', `--color:${colorScale(i)}`)
+      .html(`<span class="swatch"></span> ${d.label} <em>(${d.value})</em>`)
+      .attr('class', i === selectedIndex ? 'selected' : '')
+      .on('click', () => {
+        if (i === selectedIndex) {
+
+          currentSelection.type = currentSelection.searchQuery ? 'search' : 'none';
+          currentSelection.year = null;
+          renderProjects(projectsGiven, projectsContainer, 'h2');
+        } else {
+    
+          currentSelection.type = 'year';
+          currentSelection.year = data[i].label;
+          let filtered = projectsGiven.filter(p => String(p.year) === String(currentSelection.year));
+          renderProjects(filtered, projectsContainer, 'h2');
+        }
+    
+        renderPieChart(projectsGiven, currentSelection.year);
+      });
+  });
+}
+
+function setupSearch(allProjects) {
+  const searchInput = document.querySelector('.searchBar');
+  if (!searchInput) return;
+
+  searchInput.addEventListener('input', (event) => {
+    const query = event.target.value.toLowerCase();
+    currentSelection.searchQuery = query;
+
+    let filteredProjects = allProjects.filter(project => {
+      const values = Object.values(project).join('\n').toLowerCase();
+      return values.includes(query);
+    });
+
+  
+    if (currentSelection.type === 'year' && currentSelection.year) {
+      filteredProjects = filteredProjects.filter(p => String(p.year) === String(currentSelection.year));
+      currentSelection.type = 'both'; 
+    } else if (query) {
+      currentSelection.type = 'search';
+    } else {
+      currentSelection.type = currentSelection.year ? 'year' : 'none';
+    }
+
+    renderProjects(filteredProjects, projectsContainer, 'h2');
+    renderPieChart(
+      query ? filteredProjects : allProjects,
+      currentSelection.year
+    );
+  });
+}
+
+async function initProjects() {
+  const projects = await fetchJSON('../lib/projects.json');
+  renderProjects(projects, projectsContainer, 'h2');
+  renderPieChart(projects);
+  setupSearch(projects);
+
+  const title = document.querySelector('.projects-title');
+  if (title && projects) {
+    title.innerHTML = `<strong>${projects.length}</strong> Projects`;
+  }
+}
+
+initProjects();
