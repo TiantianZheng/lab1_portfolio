@@ -21,9 +21,9 @@ let arc = arcGenerator({
   startAngle: 0,
   endAngle: 2 * Math.PI
 });
-svg.append("path")
-  .attr("d", arc)
-  .attr("fill", "red");
+// svg.append("path")
+//   .attr("d", arc)
+//   .attr("fill", "red");
 
 let data = [1, 2];
 
