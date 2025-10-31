@@ -82,6 +82,42 @@ function prepareYearData(projects) {
       label: year
     }));
   }
+  function renderPieChart(projectsGiven) {
+    // clear previous chart + legend
+    let svg = d3.select('#projects-pie-plot');
+    svg.selectAll('*').remove();
+    let legend = d3.select('.legend');
+    legend.selectAll('*').remove();
+  
+    // prepare new data
+    let data = prepareYearData(projectsGiven);
+  
+    // generators
+    let arcGenerator = d3.arc().innerRadius(0).outerRadius(50);
+    let sliceGenerator = d3.pie().value(d => d.value);
+    let arcData = sliceGenerator(data);
+    let arcs = arcData.map(d => arcGenerator(d));
+  
+    // color scale
+    let colorScale = d3.scaleOrdinal(d3.schemeTableau10);
+  
+    // draw pie slices
+    arcs.forEach((arc, i) => {
+      svg.append('path')
+        .attr('d', arc)
+        .attr('fill', colorScale(i))
+        .attr('stroke', 'white')
+        .attr('stroke-width', 0.5);
+    });
+  
+    // draw legend
+    data.forEach((d, i) => {
+      legend.append('li')
+        .attr('style', `--color:${colorScale(i)}`)
+        .html(`<span class="swatch"></span> ${d.label} <em>(${d.value})</em>`);
+    });
+  }
+  
 fetch('../projects/projects.json')
 .then(resp => resp.json())
 .then(projects => {
