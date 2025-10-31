@@ -95,45 +95,41 @@ function prepareYearData(projects) {
       label: year
     }));
   }
-function renderPieChart(projectsGiven) {
+  function renderPieChart(projectsGiven) {
 
-let data = prepareYearData(projectsGiven);
-if (!data.length) return; 
-
-let arcGenerator = d3.arc().innerRadius(0).outerRadius(50);
-let sliceGenerator = d3.pie().value(d => d.value);
-let arcData = sliceGenerator(data);
-let arcs = arcData.map(d => arcGenerator(d));
-let colors = d3.scaleOrdinal(d3.schemeTableau10);
-
-arcs.forEach((arc, i) => {
-    svg.append('path')
-    .attr('d', arc)
-    .attr('fill', colors(i))
-    .attr('stroke', 'white')
-    .attr('stroke-width', 0.5);
-});
-
-data.forEach((d, i) => {
-    legend.append('li')
-    .attr('style', `--color:${colors(i)}`)
-    .html(`<span class="swatch"></span> ${d.label} <em>(${d.value})</em>`);
-});
-}
+    let rolledData = d3.rollups(projectsGiven, v => v.length, d => d.year);
+    let data = rolledData.map(([year, count]) => ({ value: count, label: year }));
+ 
+    let arcGenerator = d3.arc().innerRadius(0).outerRadius(50);
+    let sliceGenerator = d3.pie().value(d => d.value);
+    let arcData = sliceGenerator(data);
+    let arcs = arcData.map(d => arcGenerator(d));
+    let colorScale = d3.scaleOrdinal(d3.schemeTableau10);
+  
+    arcs.forEach((arc, i) => {
+      svg.append('path').attr('d', arc).attr('fill', colorScale(i));
+    });
+  
+    data.forEach((d, i) => {
+      legend.append('li')
+        .attr('style', `--color:${colorScale(i)}`)
+        .html(`<span class="swatch"></span> ${d.label} <em>(${d.value})</em>`);
+    });
+  }
 
 function setupSearch(allProjects) {
-const searchInput = document.querySelector('.searchBar');
-if (!searchInput) return;
+    const searchInput = document.querySelector('.searchBar');
+    if (!searchInput) return;
 
-searchInput.addEventListener('input', (event) => {
-    const query = event.target.value.toLowerCase();
+    searchInput.addEventListener('input', (event) => {
+        const query = event.target.value.toLowerCase();
 
-    const filteredProjects = allProjects.filter(project => {
-    const values = Object.values(project).join('\n').toLowerCase();
-    return values.includes(query);
+        const filteredProjects = allProjects.filter(project => {
+        const values = Object.values(project).join('\n').toLowerCase();
+        return values.includes(query);
+        });
+
+        renderProjects(filteredProjects, projectsContainer, 'h2');
+        renderPieChart(filteredProjects);
     });
-
-    renderProjects(filteredProjects, projectsContainer, 'h2');
-    renderPieChart(filteredProjects);
-});
 }

@@ -273,3 +273,20 @@ h3, h4, h5, h6 {
   gap: 2em;               
   margin-block: 2em;
 }
+
+.searchBar {
+  width: 60%;                
+  max-width: 400px;
+  padding: 0.6em 1em;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1em;
+  text-align: center;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.searchBar:focus {
+  border-color: #666;
+  box-shadow: 0 0 5px #aaa;
+}
