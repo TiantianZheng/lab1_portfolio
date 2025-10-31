@@ -82,3 +82,9 @@ function prepareYearData(projects) {
       label: year
     }));
   }
+fetch('../projects/projects.json')
+.then(resp => resp.json())
+.then(projects => {
+renderProjects(projects, projectsContainer, 'h2');
+renderPieChart(projects);
+});
