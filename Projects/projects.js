@@ -1,5 +1,7 @@
 import { fetchJSON, renderProjects } from '../global.js';
 import * as d3 from 'https://cdn.jsdelivr.net/npm/d3@7.9.0/+esm';
+import { renderProjects } from '../global.js';
+const projectsContainer = document.querySelector('.projects');
 
 async function initProjects() {
     const projects = await fetchJSON('../lib/projects.json');
@@ -67,3 +69,16 @@ data.forEach((d, idx) => {
     .attr('style', `--color:${colors(idx)}`) // set the style attribute while passing in parameters
     .html(`<span class="swatch"></span> ${d.label} <em>(${d.value})</em>`); // set the inner html of <li>
 });
+
+function prepareYearData(projects) {
+    let rolledData = d3.rollups(
+      projects,
+      v => v.length,  
+      d => d.year
+    );
+  
+    return rolledData.map(([year, count]) => ({
+      value: count,
+      label: year
+    }));
+  }
