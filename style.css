@@ -246,9 +246,9 @@ h3, h4, h5, h6 {
   padding: 1em;
   margin: 0;
   list-style: none;
-  flex: 1;                    /* ✅ 让 legend 占据剩余空间 */
-  min-width: 250px;           /* 最小宽度防止太窄 */
-  max-width: 400px;           /* 最大宽度控制比例 */
+  flex: 1;                   
+  min-width: 250px;          
+  max-width: 400px;          
 }
 
 .legend li {
@@ -268,8 +268,8 @@ h3, h4, h5, h6 {
 }
 .container {
   display: flex;
-  justify-content: center;   /* 居中整个容器 */
-  align-items: center;       /* 垂直居中对齐 */
-  gap: 2em;                  /* 饼图和legend之间留白 */
+  justify-content: center;  
+  align-items: center;      
+  gap: 2em;               
   margin-block: 2em;
 }
