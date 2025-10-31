@@ -96,6 +96,11 @@ function prepareYearData(projects) {
     }));
   }
   function renderPieChart(projectsGiven) {
+    let svg = d3.select('#projects-pie-plot');
+    svg.selectAll('*').remove();
+
+    let legend = d3.select('.legend');
+    legend.selectAll('*').remove();
 
     let rolledData = d3.rollups(projectsGiven, v => v.length, d => d.year);
     let data = rolledData.map(([year, count]) => ({ value: count, label: year }));
