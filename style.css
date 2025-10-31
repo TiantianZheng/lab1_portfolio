@@ -230,10 +230,8 @@ h3, h4, h5, h6 {
   margin-top: 0.3em;
 }
 
-#projects-pie-plot {
-  display: left;         /* allows centering */
-  max-width: 20em;        /* limit the width */
-  height: auto;           /* keep the aspect ratio */
-  margin: 2em auto;       /* center it horizontally */
+#projects-plot {
+  max-width: 20em;
+  margin-block: 2em;
   overflow: visible;
 }
