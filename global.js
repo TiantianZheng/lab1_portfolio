@@ -101,29 +101,34 @@ export async function fetchJSON(url) {
   }
 }
 
+
 export function renderProjects(projects, containerElement, headingLevel = 'h2') {
   if (!containerElement) {
     console.error('Invalid container element.');
     return;
   }
 
-  containerElement.innerHTML = ''; 
+  containerElement.innerHTML = '';
 
   if (!projects || projects.length === 0) {
     containerElement.innerHTML = '<p>No projects found.</p>';
     return;
-}
+  }
 
   projects.forEach(project => {
     const article = document.createElement('article');
     const title = project.title || 'Untitled Project';
     const image = project.image || '../assets/default.png';
     const description = project.description || 'No description available.';
+    const year = project.year || ''; 
 
     article.innerHTML = `
       <${headingLevel}>${title}</${headingLevel}>
       <img src="${image}" alt="${title}" />
-      <p>${description}</p>
+      <div class="project-info">
+        <p>${description}</p>
+        ${year ? `<p class="year">${year}</p>` : ''}
+      </div>
     `;
 
     containerElement.appendChild(article);
