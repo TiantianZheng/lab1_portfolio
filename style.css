@@ -263,3 +263,13 @@ h3, h4, h5, h6 {
   background-color: var(--color);
   border-radius: 0.25em;
 }
+.container {
+  display: flex;            
+  align-items: center;       
+  justify-content: center;   
+  gap: 2em;                 
+  flex-wrap: wrap;        
+  margin-block: 2em;
+}
+
+#pr
