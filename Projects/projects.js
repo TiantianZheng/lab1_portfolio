@@ -45,7 +45,7 @@ let arcs = arcData.map((d) => arcGenerator(d));
 // }
 
 // let arcs = arcData.map((d) => arcGenerator(d));
-let colors = ['gold', 'purple'];
+let colors = d3.scaleOrdinal(d3.schemeTableau10);
 
 arcs.forEach((arc, idx) => {
   svg.append("path")
