@@ -107,7 +107,7 @@ function renderCommitInfo(data, commits) {
       (d) => d[1]
     ).toFixed(2));
   
-    addStat('MAX DEPTH', d3.max(data, (d) => d.depth));
+    // addStat('MAX DEPTH', d3.max(data, (d) => d.depth));
     addStat('LONGEST LINE', d3.max(data, (d) => d.length));
     addStat('MOST WORK DONE IN', (() => {
       const workByPeriod = d3.rollups(
