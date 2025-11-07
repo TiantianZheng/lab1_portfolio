@@ -237,19 +237,19 @@ function renderScatterPlot(data, commits) {
     const rScale = d3
     .scaleSqrt()
     .domain([minLines, maxLines])
-    .range([2, 30]); 
+    .range([2, 12]); 
 
     const sortedCommits = d3.sort(commits, (d) => -d.totalLines);
     const dots = svg.append('g').attr('class', 'dots');
     dots
     .selectAll('circle')
-    .data(commits)
+    .data(sortedCommits)
     .join('circle')
     .attr('cx', (d) => xScale(d.datetime))
     .attr('cy', (d) => yScale(d.hourFrac))
     .attr('r', (d) => rScale(d.totalLines))
-    .attr('r', 5)
     .attr('fill', 'steelblue')
+    .style('fill-opacity', 0.7)
     .on('mouseenter', (event, commit) => {
       renderTooltipContent(commit);
       updateTooltipVisibility(true);
