@@ -41,8 +41,38 @@ return d3
     });
 }
 
-  
+
   
 let data = await loadData();
 let commits = processCommits(data);
 console.log(commits);
+
+function renderCommitInfo(data, commits) {
+    // Create the dl element
+    const dl = d3.select('#stats').append('dl').attr('class', 'stats');
+  
+    // Add total LOC
+    dl.append('dt').html('Total <abbr title="Lines of code">LOC</abbr>');
+    dl.append('dd').text(data.length);
+  
+    // Add total commits
+    dl.append('dt').text('Total commits');
+    dl.append('dd').text(commits.length);
+  
+    // Add more stats as needed...
+    const numFiles = d3.group(data, (d) => d.file).size;
+    dl.append('dt').text('Number of files');
+    dl.append('dd').text(numFiles);
+
+    const avgFileLength = d3.mean(fileLengths, (d) => d[1]);
+    dl.append('dt').text('Average file length');
+    dl.append('dd').text(avgFileLength.toFixed(2));
+
+    const avgDepth = d3.mean(data, (d) => d.depth);
+    dl.append('dt').text('Average code depth');
+    dl.append('dd').text(avgDepth.toFixed(2));
+  }
+  
+  
+  renderCommitInfo(data, commits);
+
