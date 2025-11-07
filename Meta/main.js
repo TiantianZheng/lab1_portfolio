@@ -90,34 +90,34 @@ function renderCommitInfo(data, commits) {
       dl.append('dd').text(maxPeriod ?? 'N/A');
   }
 
-// function renderCommitInfo(data, commits) {
-//     const container = d3.select('#stats').append('div').attr('class', 'stats');
+function renderCommitInfo(data, commits) {
+    const container = d3.select('#stats').append('div').attr('class', 'stats');
   
-//     function addStat(label, value) {
-//       const card = container.append('div').attr('class', 'stat');
-//       card.append('dt').text(label);
-//       card.append('dd').text(value);
-//     }
+    function addStat(label, value) {
+      const card = container.append('div').attr('class', 'stat');
+      card.append('dt').text(label);
+      card.append('dd').text(value);
+    }
   
-//     addStat('COMMITS', commits.length);
-//     addStat('FILES', d3.group(data, (d) => d.file).size);
-//     addStat('TOTAL LOC', data.length);
-//     addStat('AVG FILE LENGTH', d3.mean(
-//       d3.rollups(data, (v) => d3.max(v, (d) => d.line), (d) => d.file),
-//       (d) => d[1]
-//     ).toFixed(2));
+    addStat('COMMITS', commits.length);
+    addStat('FILES', d3.group(data, (d) => d.file).size);
+    addStat('TOTAL LOC', data.length);
+    addStat('AVG FILE LENGTH', d3.mean(
+      d3.rollups(data, (v) => d3.max(v, (d) => d.line), (d) => d.file),
+      (d) => d[1]
+    ).toFixed(2));
   
-//     addStat('MAX DEPTH', d3.max(data, (d) => d.depth));
-//     addStat('LONGEST LINE', d3.max(data, (d) => d.length));
-//     addStat('MOST WORK DONE IN', (() => {
-//       const workByPeriod = d3.rollups(
-//         data,
-//         (v) => v.length,
-//         (d) => new Date(d.datetime).toLocaleString('en', { dayPeriod: 'short' })
-//       );
-//       return d3.greatest(workByPeriod, (d) => d[1])?.[0] ?? 'N/A';
-//     })());
-//   }
+    addStat('MAX DEPTH', d3.max(data, (d) => d.depth));
+    addStat('LONGEST LINE', d3.max(data, (d) => d.length));
+    addStat('MOST WORK DONE IN', (() => {
+      const workByPeriod = d3.rollups(
+        data,
+        (v) => v.length,
+        (d) => new Date(d.datetime).toLocaleString('en', { dayPeriod: 'short' })
+      );
+      return d3.greatest(workByPeriod, (d) => d[1])?.[0] ?? 'N/A';
+    })());
+  }
 
 
 let data = await loadData();
