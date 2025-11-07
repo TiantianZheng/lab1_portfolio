@@ -316,3 +316,19 @@ path:hover {
 .selected:is(path) {
   fill: var(--color);
 }
+
+.stats {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.5rem 1rem;
+  margin-top: 1rem;
+  max-width: 600px;
+}
+.stats dt {
+  font-weight: bold;
+  color: #222;
+}
+.stats dd {
+  margin: 0;
+  color: #444;
+}
