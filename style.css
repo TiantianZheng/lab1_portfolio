@@ -317,7 +317,7 @@ path:hover {
   fill: var(--color);
 }
 
-/* === Summary stats bar (clean horizontal layout) === */
+/* === Clean horizontal summary stats (lighter numbers) === */
 .stats {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
@@ -331,27 +331,28 @@ path:hover {
   max-width: 1000px;
 }
 
-/* Labels (dt) — smaller, gray, uppercase */
+/* Label (dt) — uppercase, gray, slightly bolder */
 .stats dt {
   grid-row: 1;
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: #6b7280; /* neutral gray */
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #6b7280;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.06em;
   margin: 0;
 }
 
-/* Values (dd) — medium weight, not too bold */
+/* Value (dd) — thinner, larger but elegant */
 .stats dd {
   grid-row: 2;
-  font-size: 1.6rem;
-  font-weight: 600;
-  color: #111827; /* softer black */
+  font-size: 1.7rem;
+  font-weight: 300;  /* ⬅️ thinner number weight */
+  color: #111827;
   margin: 0;
+  font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
 }
 
-/* Optional: overall title */
+/* Optional: section title */
 h2.stats-title {
   font-size: 1.25rem;
   font-weight: 700;
