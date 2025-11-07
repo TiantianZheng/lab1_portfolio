@@ -317,37 +317,46 @@ path:hover {
   fill: var(--color);
 }
 
-/* === Meta summary stats === */
+/* === Summary stats bar (clean horizontal layout) === */
 .stats {
-  text-align: left;
-  margin: 4rem auto;
-  max-width: 900px;
-
-  /* Grid layout */
   display: grid;
-  grid-template-columns: repeat(6, 1fr); /* 根据显示项多少调整 */
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
   align-items: center;
   justify-items: center;
-  row-gap: 0.5rem;
+  background: #fff;
+  padding: 1.5rem 2rem;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  margin: 2rem auto;
+  max-width: 1000px;
 }
 
-/* Label (dt) */
+/* Labels (dt) — smaller, gray, uppercase */
 .stats dt {
   grid-row: 1;
-  font-size: 0.9rem;
-  font-weight: 600;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #6b7280; /* neutral gray */
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: #6b7280; /* soft gray */
   margin: 0;
 }
 
-/* Value (dd) */
+/* Values (dd) — medium weight, not too bold */
 .stats dd {
   grid-row: 2;
-  font-size: 2.2rem;
-  font-weight: 700;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #111827; /* softer black */
   margin: 0;
-  color: #111;
+}
+
+/* Optional: overall title */
+h2.stats-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 1rem auto 1rem auto;
+  color: #111827;
+  max-width: 1000px;
 }
 
