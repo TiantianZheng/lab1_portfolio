@@ -46,49 +46,49 @@ return d3
 
 
 
-function renderCommitInfo(data, commits) {
-    // Create the dl element
-    const dl = d3.select('#stats').append('dl').attr('class', 'stats');
+// function renderCommitInfo(data, commits) {
+//     // Create the dl element
+//     const dl = d3.select('#stats').append('dl').attr('class', 'stats');
   
-    // Add total LOC
-    dl.append('dt').html('TOTAL <abbr title="Lines of code">LOC</abbr>');
-    dl.append('dd').text(data.length);
+//     // Add total LOC
+//     dl.append('dt').html('TOTAL <abbr title="Lines of code">LOC</abbr>');
+//     dl.append('dd').text(data.length);
   
-    // Add total commits
-    dl.append('dt').text('COMMITS');
-    dl.append('dd').text(commits.length);
+//     // Add total commits
+//     dl.append('dt').text('COMMITS');
+//     dl.append('dd').text(commits.length);
   
-    // Add more stats as needed...
-    const numFiles = d3.group(data, (d) => d.file).size;
-    dl.append('dt').text('FILES');
-    dl.append('dd').text(numFiles);
+//     // Add more stats as needed...
+//     const numFiles = d3.group(data, (d) => d.file).size;
+//     dl.append('dt').text('FILES');
+//     dl.append('dd').text(numFiles);
 
-    const fileLengths = d3.rollups(
-        data,
-        (v) => d3.max(v, (d) => d.line),
-        (d) => d.file
-      );
+//     const fileLengths = d3.rollups(
+//         data,
+//         (v) => d3.max(v, (d) => d.line),
+//         (d) => d.file
+//       );
     
-      // Longest file
-      const longestFile = d3.greatest(fileLengths, (d) => d[1]);
-      dl.append('dt').text('LONGEST FILE');
-      dl.append('dd').text(`${longestFile[0]} (${longestFile[1]} lines)`);
+//       // Longest file
+//       const longestFile = d3.greatest(fileLengths, (d) => d[1]);
+//       dl.append('dt').text('LONGEST FILE');
+//       dl.append('dd').text(`${longestFile[0]} (${longestFile[1]} lines)`);
     
-      // Average file length
-      const avgFileLength = d3.mean(fileLengths, (d) => d[1]);
-      dl.append('dt').text('AVG FILE LENGTH');
-      dl.append('dd').text(avgFileLength.toFixed(2));
+//       // Average file length
+//       const avgFileLength = d3.mean(fileLengths, (d) => d[1]);
+//       dl.append('dt').text('AVG FILE LENGTH');
+//       dl.append('dd').text(avgFileLength.toFixed(2));
     
-      // Most work done in (morning/afternoon/night)
-      const workByPeriod = d3.rollups(
-        data,
-        (v) => v.length,
-        (d) => new Date(d.datetime).toLocaleString('en', { dayPeriod: 'short' })
-      );
-      const maxPeriod = d3.greatest(workByPeriod, (d) => d[1])?.[0];
-      dl.append('dt').text('MOST WORK DONE IN');
-      dl.append('dd').text(maxPeriod ?? 'N/A');
-  }
+//       // Most work done in (morning/afternoon/night)
+//       const workByPeriod = d3.rollups(
+//         data,
+//         (v) => v.length,
+//         (d) => new Date(d.datetime).toLocaleString('en', { dayPeriod: 'short' })
+//       );
+//       const maxPeriod = d3.greatest(workByPeriod, (d) => d[1])?.[0];
+//       dl.append('dt').text('MOST WORK DONE IN');
+//       dl.append('dd').text(maxPeriod ?? 'N/A');
+//   }
 
 function renderCommitInfo(data, commits) {
     const container = d3.select('#stats').append('div').attr('class', 'stats');
