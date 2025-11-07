@@ -166,7 +166,20 @@ function renderScatterPlot(data, commits) {
     );
 
 
-    const xAxis = d3.axisBottom(xScale);
+    // const xAxis = d3.axisBottom(xScale);
+    const locale = d3.timeFormatLocale({
+        dateTime: "%x, %X",
+        date: "%-m/%-d/%Y",
+        time: "%-I:%M:%S %p",
+        periods: ["AM", "PM"],
+        days: ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+        shortDays: ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],
+        months: ["January","February","March","April","May","June","July","August","September","October","November","December"],
+        shortMonths: ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
+      });
+      
+    const xAxis = d3.axisBottom(xScale)
+    .tickFormat(locale.format("%b %d"));
     const yAxis = d3.axisLeft(yScale)
     .tickFormat(d => String(d % 24).padStart(2, '0') + ':00');
 
