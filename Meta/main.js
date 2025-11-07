@@ -51,16 +51,16 @@ function renderCommitInfo(data, commits) {
     const dl = d3.select('#stats').append('dl').attr('class', 'stats');
   
     // Add total LOC
-    dl.append('dt').html('Total <abbr title="Lines of code">LOC</abbr>');
+    dl.append('dt').html('TOTAL <abbr title="Lines of code">LOC</abbr>');
     dl.append('dd').text(data.length);
   
     // Add total commits
-    dl.append('dt').text('Total commits');
+    dl.append('dt').text('COMMITS');
     dl.append('dd').text(commits.length);
   
     // Add more stats as needed...
     const numFiles = d3.group(data, (d) => d.file).size;
-    dl.append('dt').text('Number of files');
+    dl.append('dt').text('FILES');
     dl.append('dd').text(numFiles);
 
     const fileLengths = d3.rollups(
@@ -71,18 +71,13 @@ function renderCommitInfo(data, commits) {
     
       // Longest file
       const longestFile = d3.greatest(fileLengths, (d) => d[1]);
-      dl.append('dt').text('Longest file');
+      dl.append('dt').text('LONGEST FILE');
       dl.append('dd').text(`${longestFile[0]} (${longestFile[1]} lines)`);
     
       // Average file length
       const avgFileLength = d3.mean(fileLengths, (d) => d[1]);
-      dl.append('dt').text('Average file length');
+      dl.append('dt').text('AVG FILE LENGTH');
       dl.append('dd').text(avgFileLength.toFixed(2));
-    
-      // Average depth
-      const avgDepth = d3.mean(data, (d) => d.depth);
-      dl.append('dt').text('Average code depth');
-      dl.append('dd').text(avgDepth.toFixed(2));
     
       // Most work done in (morning/afternoon/night)
       const workByPeriod = d3.rollups(
@@ -91,7 +86,7 @@ function renderCommitInfo(data, commits) {
         (d) => new Date(d.datetime).toLocaleString('en', { dayPeriod: 'short' })
       );
       const maxPeriod = d3.greatest(workByPeriod, (d) => d[1])?.[0];
-      dl.append('dt').text('Most work done in');
+      dl.append('dt').text('MOST WORK DONE IN');
       dl.append('dd').text(maxPeriod ?? 'N/A');
   }
 
