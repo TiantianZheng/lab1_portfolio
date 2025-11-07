@@ -109,14 +109,14 @@ function renderCommitInfo(data, commits) {
   
     addStat('MAX DEPTH', d3.max(data, (d) => d.depth));
     addStat('LONGEST LINE', d3.max(data, (d) => d.length));
-    addStat('MOST WORK DONE IN', (() => {
-      const workByPeriod = d3.rollups(
-        data,
-        (v) => v.length,
-        (d) => new Date(d.datetime).toLocaleString('en', { dayPeriod: 'short' })
-      );
-      return d3.greatest(workByPeriod, (d) => d[1])?.[0] ?? 'N/A';
-    })());
+    // addStat('MOST WORK DONE IN', (() => {
+    //   const workByPeriod = d3.rollups(
+    //     data,
+    //     (v) => v.length,
+    //     (d) => new Date(d.datetime).toLocaleString('en', { dayPeriod: 'short' })
+    //   );
+    //   return d3.greatest(workByPeriod, (d) => d[1])?.[0] ?? 'N/A';
+    // })());
   }
 
 
