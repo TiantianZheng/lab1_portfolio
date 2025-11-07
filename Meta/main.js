@@ -151,7 +151,7 @@ function renderScatterPlot(data, commits) {
     .scaleTime()
     .domain(d3.extent(commits, (d) => d.datetime))
     .range([0, width])
-    // .nice()
+    .nice()
     ;
 
     const yScale = d3.scaleLinear()
@@ -189,6 +189,12 @@ function renderScatterPlot(data, commits) {
     .append('g')
     .attr('transform', `translate(0, ${usableArea.bottom})`)
     .call(xAxis);
+    // svg.append("g")
+    // .attr("transform", `translate(${usableArea.left + 15}, ${usableArea.bottom})`)
+    // .call(xAxis)
+    // .selectAll("text")
+    // .attr("transform", "rotate(-30)")
+    // .style("text-anchor", "end");
 
     // Add Y axis
     svg
