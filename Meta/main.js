@@ -124,6 +124,26 @@ let data = await loadData();
 let commits = processCommits(data);  
 renderCommitInfo(data, commits);
 
+function renderTooltipContent(commit) {
+    const link = document.getElementById('commit-link');
+    const date = document.getElementById('commit-date');
+    const author = document.getElementById('commit-author');
+    const lines = document.getElementById('commit-lines');
+  
+    if (Object.keys(commit).length === 0) return;
+  
+    link.href = commit.url;
+    link.textContent = commit.id.slice(0, 7); 
+    date.textContent = commit.datetime?.toLocaleString('en', {
+    dateStyle: 'medium',
+    timeStyle: 'short'
+    });
+    author.textContent = commit.author || 'Unknown';
+    lines.textContent = commit.totalLines;
+}
+
+renderTooltipContent(commit);
+
 
 function renderScatterPlot(data, commits) {
     const width = 1000;
@@ -217,17 +237,3 @@ function renderScatterPlot(data, commits) {
 }
 renderScatterPlot(data, commits);
 
-function renderTooltipContent(commit) {
-    const link = document.getElementById('commit-link');
-    const date = document.getElementById('commit-date');
-  
-    if (Object.keys(commit).length === 0) return;
-  
-    link.href = commit.url;
-    link.textContent = commit.id;
-    date.textContent = commit.datetime?.toLocaleString('en', {
-      dateStyle: 'full',
-    });
-  }
-  
-renderTooltipContent(commit);
