@@ -63,15 +63,29 @@ function renderCommitInfo(data, commits) {
     dl.append('dt').text('Number of files');
     dl.append('dd').text(numFiles);
 
-    const avgFileLength = d3.mean(fileLengths, (d) => d[1]);
-    dl.append('dt').text('Average file length');
-    dl.append('dd').text(avgFileLength.toFixed(2));
-
-    const avgDepth = d3.mean(data, (d) => d.depth);
-    dl.append('dt').text('Average code depth');
-    dl.append('dd').text(avgDepth.toFixed(2));
-
-    const workByPeriod = d3.rollups(
+    const fileLengths = d3.rollups(
+        data,
+        (v) => d3.max(v, (d) => d.line),
+        (d) => d.file
+      );
+    
+      // Longest file
+      const longestFile = d3.greatest(fileLengths, (d) => d[1]);
+      dl.append('dt').text('Longest file');
+      dl.append('dd').text(`${longestFile[0]} (${longestFile[1]} lines)`);
+    
+      // Average file length
+      const avgFileLength = d3.mean(fileLengths, (d) => d[1]);
+      dl.append('dt').text('Average file length');
+      dl.append('dd').text(avgFileLength.toFixed(2));
+    
+      // Average depth
+      const avgDepth = d3.mean(data, (d) => d.depth);
+      dl.append('dt').text('Average code depth');
+      dl.append('dd').text(avgDepth.toFixed(2));
+    
+      // Most work done in (morning/afternoon/night)
+      const workByPeriod = d3.rollups(
         data,
         (v) => v.length,
         (d) => new Date(d.datetime).toLocaleString('en', { dayPeriod: 'short' })
