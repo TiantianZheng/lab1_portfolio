@@ -335,7 +335,7 @@ path:hover {
 .stats dt {
   grid-row: 1;
   font-size: 0.8rem;
-  font-weight: 600;
+  font-weight: 500;
   color: #6b7280;
   text-transform: uppercase;
   letter-spacing: 0.06em;
