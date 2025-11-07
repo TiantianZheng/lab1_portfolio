@@ -317,18 +317,40 @@ path:hover {
   fill: var(--color);
 }
 
+/* Container */
 .stats {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 0.5rem 1rem;
-  margin-top: 1rem;
-  max-width: 600px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  background: #fafafa;
+  padding: 1.5rem 2rem;
+  border-radius: 12px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  margin-top: 1.5rem;
+  max-width: 1000px;
 }
-.stats dt {
-  font-weight: bold;
-  color: #222;
+
+/* Each stat card */
+.stat {
+  flex: 1 1 150px;
+  text-align: center;
+  margin: 0.5rem;
 }
-.stats dd {
+
+/* Label (dt) */
+.stat dt {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.25rem;
+}
+
+/* Value (dd) */
+.stat dd {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #111;
   margin: 0;
-  color: #444;
 }
