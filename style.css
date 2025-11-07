@@ -444,3 +444,17 @@ circle.selected {
   margin: 0;
   color: black;
 }
+
+@keyframes marching-ants {
+  to {
+    stroke-dashoffset: -8; 
+  }
+}
+
+.selection {
+  fill: rgba(0, 0, 0, 0.05); 
+  stroke: #111;             
+  stroke-opacity: 0.7;      
+  stroke-dasharray: 5 3;     
+  animation: marching-ants 2s linear infinite;
+}
