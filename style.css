@@ -423,6 +423,6 @@ circle:hover {
 
 circle.selected {
   fill: #ff6b6b;
-  stroke: black;
+  /* stroke: black; */
   stroke-width: 1px;
 }
