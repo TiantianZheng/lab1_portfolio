@@ -426,7 +426,7 @@ circle.selected {
   /* stroke: black; */
   stroke-width: 1px;
 }
-#language-breakdown {
+/* #language-breakdown {
   margin-top: 1rem;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -442,4 +442,4 @@ circle.selected {
 #language-breakdown dd {
   margin: 0;
   color: #4b5563;
-}
+} */
