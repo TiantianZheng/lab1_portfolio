@@ -166,9 +166,7 @@ function renderScatterPlot(data, commits) {
     );
 
 
-    const xAxis = d3.axisBottom(xScale)
-    .ticks(d3.timeWeek.every(1))
-    .tickFormat(d3.timeFormat("%b %d"));
+    const xAxis = d3.axisBottom(xScale);
     const yAxis = d3.axisLeft(yScale)
     .tickFormat(d => String(d % 24).padStart(2, '0') + ':00');
 
