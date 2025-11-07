@@ -130,19 +130,29 @@ function renderTooltipContent(commit) {
     const author = document.getElementById('commit-author');
     const lines = document.getElementById('commit-lines');
   
-    if (Object.keys(commit).length === 0) return;
+    if (!commit) return;
   
     link.href = commit.url;
-    link.textContent = commit.id.slice(0, 7); 
+    link.textContent = commit.id.slice(0, 7);
     date.textContent = commit.datetime?.toLocaleString('en', {
-    dateStyle: 'medium',
-    timeStyle: 'short'
+      dateStyle: 'medium',
+      timeStyle: 'short',
     });
     author.textContent = commit.author || 'Unknown';
     lines.textContent = commit.totalLines;
-}
-
-renderTooltipContent(commit);
+  }
+  
+  function updateTooltipVisibility(isVisible) {
+    const tooltip = document.getElementById('commit-tooltip');
+    tooltip.hidden = !isVisible;
+  }
+  
+  function updateTooltipPosition(event) {
+    const tooltip = document.getElementById('commit-tooltip');
+    const offset = 15;
+    tooltip.style.left = `${event.clientX + offset}px`;
+    tooltip.style.top = `${event.clientY + offset}px`;
+  }
 
 
 function renderScatterPlot(data, commits) {
@@ -223,16 +233,25 @@ function renderScatterPlot(data, commits) {
     .call(yAxis);
 
     
-    const dots = svg.append('g').attr('class', 'dots');
-
-    dots
+  dots
     .selectAll('circle')
     .data(commits)
     .join('circle')
     .attr('cx', (d) => xScale(d.datetime))
     .attr('cy', (d) => yScale(d.hourFrac))
     .attr('r', 5)
-    .attr('fill', 'steelblue');
+    .attr('fill', 'steelblue')
+    .on('mouseenter', (event, commit) => {
+      renderTooltipContent(commit);
+      updateTooltipVisibility(true);
+      updateTooltipPosition(event);
+    })
+    .on('mousemove', (event) => {
+      updateTooltipPosition(event);
+    })
+    .on('mouseleave', () => {
+      updateTooltipVisibility(false);
+    });
 
 }
 renderScatterPlot(data, commits);

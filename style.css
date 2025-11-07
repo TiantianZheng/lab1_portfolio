@@ -362,3 +362,56 @@ h2.stats-title {
 .gridlines line { stroke: #e5e7eb; stroke-opacity: 0.6; }
 .gridlines path { display: none; }
 
+dl.info {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.25rem 1rem;
+  margin: 0;
+  font-size: 0.9rem;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+dl.info[hidden] {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.tooltip {
+  position: fixed;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+dl.info dt {
+  color: #555;
+  font-weight: 600;
+}
+
+dl.info dd {
+  margin: 0;
+  font-weight: 500;
+  color: #111;
+}
+
+/* Dot hover animation */
+circle {
+  transition: 200ms;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+circle:hover {
+  transform: scale(1.5);
+}
+
+/* Gridlines lighter */
+.gridlines line {
+  stroke: #e5e7eb;
+  stroke-width: 1;
+}
+
