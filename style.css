@@ -349,7 +349,7 @@ path:hover {
   font-weight: 300;  /* ⬅️ thinner number weight */
   color: #111827;
   margin: 0;
-  font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+  /* font-family: "Inter", "Helvetica Neue", Arial, sans-serif; */
 }
 
 /* Optional: section title */
