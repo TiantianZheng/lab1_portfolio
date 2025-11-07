@@ -151,7 +151,8 @@ function renderScatterPlot(data, commits) {
     .scaleTime()
     .domain(d3.extent(commits, (d) => d.datetime))
     .range([0, width])
-    .nice();
+    // .nice()
+    ;
 
     const yScale = d3.scaleLinear()
     .domain([0, 24])
