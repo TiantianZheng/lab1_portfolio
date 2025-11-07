@@ -229,3 +229,5 @@ function renderTooltipContent(commit) {
       dateStyle: 'full',
     });
   }
+  
+renderTooltipContent(commit);
