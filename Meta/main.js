@@ -43,9 +43,8 @@ return d3
 
 
   
-let data = await loadData();
-let commits = processCommits(data);
-console.log(commits);
+
+
 
 function renderCommitInfo(data, commits) {
     // Create the dl element
@@ -71,8 +70,21 @@ function renderCommitInfo(data, commits) {
     const avgDepth = d3.mean(data, (d) => d.depth);
     dl.append('dt').text('Average code depth');
     dl.append('dd').text(avgDepth.toFixed(2));
+
+    const workByPeriod = d3.rollups(
+        data,
+        (v) => v.length,
+        (d) => new Date(d.datetime).toLocaleString('en', { dayPeriod: 'short' })
+      );
+      const maxPeriod = d3.greatest(workByPeriod, (d) => d[1])?.[0];
+      dl.append('dt').text('Most work done in');
+      dl.append('dd').text(maxPeriod ?? 'N/A');
   }
+
+
+
   
-  
-  renderCommitInfo(data, commits);
+  let data = await loadData();
+  let commits = processCommits(data);  
+renderCommitInfo(data, commits);
 
