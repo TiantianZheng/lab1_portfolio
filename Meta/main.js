@@ -272,6 +272,41 @@ function renderScatterPlot(data, commits) {
     
     return selectedCommits;
     }
+    function renderLanguageBreakdown(selection) {
+        const selectedCommits = selection
+          ? commits.filter((d) => isCommitSelected(selection, d))
+          : [];
+      
+        const container = document.getElementById('language-breakdown');
+      
+
+        if (selectedCommits.length === 0) {
+          container.innerHTML = '';
+          return;
+        }
+      
+
+        const lines = selectedCommits.flatMap((d) => d.lines);
+  
+        const breakdown = d3.rollup(
+          lines,
+          (v) => v.length,
+          (d) => d.type
+        );
+  
+        container.innerHTML = '';
+      
+        const total = lines.length;
+
+        for (const [language, count] of breakdown) {
+          const proportion = count / total;
+          const formatted = d3.format('.1~%')(proportion);
+          container.innerHTML += `
+            <dt>${language}</dt>
+            <dd>${count} lines (${formatted})</dd>
+          `;
+        }
+      }
 
 
     function brushed(event) {
@@ -282,6 +317,7 @@ function renderScatterPlot(data, commits) {
         );
 
         renderSelectionCount(selection, commits);
+        renderLanguageBreakdown(selection);
       }
 
       const brush = d3.brush()

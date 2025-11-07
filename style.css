@@ -426,3 +426,20 @@ circle.selected {
   /* stroke: black; */
   stroke-width: 1px;
 }
+#language-breakdown {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.3rem 1rem;
+  font-size: 0.9rem;
+}
+
+#language-breakdown dt {
+  font-weight: 600;
+  color: #374151;
+}
+
+#language-breakdown dd {
+  margin: 0;
+  color: #4b5563;
+}
