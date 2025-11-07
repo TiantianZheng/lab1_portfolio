@@ -138,8 +138,7 @@ function renderScatterPlot(data, commits) {
         width: width - margin.left - margin.right,
         height: height - margin.top - margin.bottom,
       };
-    // xScale.range([usableArea.left, usableArea.right]);
-    // yScale.range([usableArea.bottom, usableArea.top]);
+   
       
     const svg = d3
     .select('#chart')
@@ -153,10 +152,14 @@ function renderScatterPlot(data, commits) {
     .range([0, width])
     .nice()
     ;
+    
 
     const yScale = d3.scaleLinear()
     .domain([0, 24])
     .range([usableArea.bottom, usableArea.top]);
+
+    xScale.range([usableArea.left, usableArea.right]);
+    yScale.range([usableArea.bottom, usableArea.top]);
 
     const gridlines = svg.append('g')
     .attr('class', 'gridlines')
@@ -167,35 +170,32 @@ function renderScatterPlot(data, commits) {
     );
 
 
-    // const xAxis = d3.axisBottom(xScale);
-    const locale = d3.timeFormatLocale({
-        dateTime: "%x, %X",
-        date: "%-m/%-d/%Y",
-        time: "%-I:%M:%S %p",
-        periods: ["AM", "PM"],
-        days: ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
-        shortDays: ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],
-        months: ["January","February","March","April","May","June","July","August","September","October","November","December"],
-        shortMonths: ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
-      });
+    const xAxis = d3.axisBottom(xScale);
+    // const locale = d3.timeFormatLocale({
+    //     dateTime: "%x, %X",
+    //     date: "%-m/%-d/%Y",
+    //     time: "%-I:%M:%S %p",
+    //     periods: ["AM", "PM"],
+    //     days: ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+    //     shortDays: ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],
+    //     months: ["January","February","March","April","May","June","July","August","September","October","November","December"],
+    //     shortMonths: ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
+    //   });
       
-    const xAxis = d3.axisBottom(xScale)
-    .tickFormat(locale.format("%b %d"));
+    // const xAxis = d3.axisBottom(xScale)
+    // .tickFormat(locale.format("%b %d"));
     const yAxis = d3.axisLeft(yScale)
     .tickFormat(d => String(d % 24).padStart(2, '0') + ':00');
 
     // Add X axis
-    svg
-    .append('g')
-    .attr('transform', `translate(0, ${usableArea.bottom})`)
-    .call(xAxis);
-    // svg.append("g")
-    // .attr("transform", `translate(${usableArea.left + 15}, ${usableArea.bottom})`)
-    // .call(xAxis)
-    // .selectAll("text")
-    // .attr("transform", "rotate(-30)")
-    // .style("text-anchor", "end");
 
+    svg.append("g")
+    .attr("transform", `translate(0, ${usableArea.bottom})`)
+    .call(xAxis)
+    .selectAll("text")
+    .attr("transform", "rotate(-30)")
+    .style("text-anchor", "end");
+    
     // Add Y axis
     svg
     .append('g')
@@ -216,3 +216,16 @@ function renderScatterPlot(data, commits) {
 
 }
 renderScatterPlot(data, commits);
+
+function renderTooltipContent(commit) {
+    const link = document.getElementById('commit-link');
+    const date = document.getElementById('commit-date');
+  
+    if (Object.keys(commit).length === 0) return;
+  
+    link.href = commit.url;
+    link.textContent = commit.id;
+    date.textContent = commit.datetime?.toLocaleString('en', {
+      dateStyle: 'full',
+    });
+  }
