@@ -138,8 +138,8 @@ function renderScatterPlot(data, commits) {
         width: width - margin.left - margin.right,
         height: height - margin.top - margin.bottom,
       };
-    xScale.range([usableArea.left, usableArea.right]);
-    yScale.range([usableArea.bottom, usableArea.top]);
+    // xScale.range([usableArea.left, usableArea.right]);
+    // yScale.range([usableArea.bottom, usableArea.top]);
       
     const svg = d3
     .select('#chart')
@@ -153,8 +153,10 @@ function renderScatterPlot(data, commits) {
     .range([0, width])
     .nice();
 
-    const yScale = d3.scaleLinear().domain([0, 24]).range([height, 0]);
-    
+    const yScale = d3.scaleLinear()
+    .domain([0, 24])
+    .range([usableArea.bottom, usableArea.top]);
+
 
     const xAxis = d3.axisBottom(xScale);
     const yAxis = d3.axisLeft(yScale)
