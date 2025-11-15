@@ -458,3 +458,18 @@ circle.selected {
   stroke-dasharray: 5 3;     
   animation: marching-ants 2s linear infinite;
 }
+.project .visit {
+  display: inline-block;
+  margin-top: 6px;
+  padding: 6px 10px;
+  background: #0a84ff;
+  color: white;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: 0.2s;
+}
+
+.project .visit:hover {
+  background: #006edc;
+}
