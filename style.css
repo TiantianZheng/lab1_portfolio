@@ -500,6 +500,59 @@ circle.selected {
   stroke-width: 2px;
 }
 
+#scrolly-1 {
+  position: relative;
+  display: flex;
+  gap: 2rem;
+  margin: 2rem auto;
+  max-width: 1000px;
+}
+
+#scrolly-1 > * {
+  flex: 1;
+}
+
+#scatter-story {
+  position: relative;
+}
+
+#scatter-plot {
+  position: sticky;
+  top: 2rem;
+  left: 0;
+  bottom: auto;
+  height: 50vh;
+  align-self: flex-start;
+}
+
+/* Step 样式 */
+.step {
+  margin-bottom: 60vh;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  border-left: 4px solid steelblue;
+}
+
+.step:last-child {
+  margin-bottom: 0;
+}
+
+.step p {
+  margin: 0;
+  line-height: 1.6;
+}
+
+.step a {
+  color: steelblue;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.step a:hover {
+  text-decoration: underline;
+}
+
 #files {
   display: grid;
   grid-template-columns: 1fr 4fr;
@@ -556,4 +609,9 @@ circle.selected {
   aspect-ratio: 1;
   background: var(--color, steelblue);
   border-radius: 50%;
+}
+
+#language-breakdown dd {
+  font-size: 0.9rem;   
+  font-weight: normal;
 }

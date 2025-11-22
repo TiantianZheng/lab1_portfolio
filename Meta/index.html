@@ -10,7 +10,7 @@
   <main>
     <h1>Meta</h1>
     <p>This page includes stats about the code of this website.</p>
-    <div id="time-filter" style="margin-bottom:20px;">
+    <!-- <div id="time-filter" style="margin-bottom:20px;">
       <div style="display:flex;align-items:center;margin-bottom:8px;">
         <label for="commit-progress" style="font-weight:bold;">Show commits until:</label>
       </div>
@@ -19,7 +19,22 @@
                style="width:100%;margin:0;" />
         <time id="commit-time" style="position:absolute;right:0;bottom:-25px;font-size:14px;"></time>
       </div>
+    </div> -->
+   
+    <h2 class="stats-title">Summary</h2>
+    <div id="stats"></div>
+
+    <h2 class="stats-title">Commits by time of day</h2>
+    <div id="scrolly-1">
+      <div id="scatter-story">
+      </div>
+      <div id="scatter-plot">
+        <div id="chart"></div>
+        <p id="selection-count">No commits selected</p>
+        <dl id="language-breakdown" class="stats"></dl>
+      </div>
     </div>
+
     <h2 class="stats-title">Files</h2>
     <dl id="files">
       <!-- we want the following structure for each file:
@@ -31,12 +46,6 @@
       </div>
       -->
     </dl>
-    <h2 class="stats-title">Summary</h2>
-    <div id="stats"></div>
-    <h2 class="stats-title">Commits by time of day</h2>
-    <div id="chart"></div>
-    <p id="selection-count">No commits selected</p>
-    <dl id="language-breakdown" class="stats"></dl>
   </main>
   <dl id="commit-tooltip" class="info tooltip">
     <dt>Commit</dt>
